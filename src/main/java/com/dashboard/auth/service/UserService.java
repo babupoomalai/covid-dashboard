@@ -1,6 +1,6 @@
-package com.hellokoding.auth.service;
+package com.dashboard.auth.service;
 
-import com.hellokoding.auth.model.User;
+import com.dashboard.auth.model.User;
 
 public interface UserService {
     void save(User user);

@@ -1,11 +1,11 @@
-package com.hellokoding.auth.service;
+package com.dashboard.auth.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.hellokoding.auth.model.User;
-import com.hellokoding.auth.repository.UserRepository;
+import com.dashboard.auth.model.User;
+import com.dashboard.auth.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {

@@ -1,4 +1,4 @@
-package com.hellokoding.auth;
+package com.dashboard.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

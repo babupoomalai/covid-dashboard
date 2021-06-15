@@ -1,4 +1,4 @@
-package com.hellokoding.auth.web;
+package com.dashboard.auth.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.hellokoding.auth.model.User;
-import com.hellokoding.auth.service.SecurityService;
-import com.hellokoding.auth.service.UserService;
-import com.hellokoding.auth.validator.UserValidator;
+import com.dashboard.auth.model.User;
+import com.dashboard.auth.service.SecurityService;
+import com.dashboard.auth.service.UserService;
+import com.dashboard.auth.validator.UserValidator;
 
 @Controller
 public class UserController {

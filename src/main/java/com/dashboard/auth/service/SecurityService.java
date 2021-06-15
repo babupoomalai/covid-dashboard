@@ -1,4 +1,4 @@
-package com.hellokoding.auth.service;
+package com.dashboard.auth.service;
 
 public interface SecurityService {
     boolean isAuthenticated();

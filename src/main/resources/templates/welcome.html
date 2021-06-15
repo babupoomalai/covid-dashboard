@@ -1,28 +1,93 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="utf-8">
-  <title>Create an account</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <meta charset="UTF-8" />
+  <title>Spring Boot Thymeleaf Application - Bootstrap Table</title>
+
+  <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} " />
 </head>
 
 <body>
-  <div class="container">
-    <div sec:authorize="isAuthenticated()">
-      <form id="logoutForm" method="POST" th:action="@{/logout}">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-      </form>
 
-      <h2>Welcome <span sec:authentication="name"></span> | <a
-          onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">Thymeleaf - Bootstrap Table</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div align="center">
-      <a th:href="@{/barChart}">Bar-Chart</a><br /> <br />
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mt-5 mb-5">
+        <table id="example" class="table table-bordered" style="width: 100%">
+          <thead>
+            <tr>
+              <th>State/UT</th>
+              <th>Confirmed</th>
+              <th>Active</th>
+              <th>Recovered</th>
+              <th>Deceased</th>
+              <th>Last Updated</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="location : ${locations.page.content}">
+              <td th:text="${location.state}">Name</td>
+              <td th:text="${location.active}">Position</td>
+              <td th:text="${location.active}">Office</td>
+              <td th:text="${location.deaths}">Office</td>
+              <td th:text="${#dates.format(location.startDate, 'dd.MM.yyyy')}">Start date</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <nav aria-label="Page navigation" class="paging">
+                <ul class="pagination" th:if="${locations.page.totalPages > 1}">
+                    <li class="page-item" th:classappend="${!locations.paging.isPrevEnabled()? 'disabled' : ''}">
+                        <a class="page-link" th:href="@{'/?pageNumber=' + ${locations.paging.pageNumber - 1}}"
+                           tabindex="-1">Previous</a>
+                    </li>
+                    <th:block th:each="item : ${locations.paging.getItems()}">
+                        <li class="page-item" th:classappend="${item.index == locations.paging.pageNumber? 'active' : ''}"
+                            th:if="${item.pageItemType.name() == 'PAGE'}">
+                            <a class="page-link" th:href="@{'/?pageNumber=' + ${item.index}}"
+                               th:text="${item.index}"></a>
+                        </li>
+                        <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+                            <a class="page-link" href="#">...</a>
+                        </li>
+                    </th:block>
+                    <li class="page-item" th:classappend="${!locations.paging.isNextEnabled()? 'disabled' : ''}">
+                        <a class="page-link" th:href="@{'/?pageNumber=' + ${locations.paging.pageNumber + 1}}">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
-  </div>
+</div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
